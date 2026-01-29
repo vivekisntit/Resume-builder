@@ -15,7 +15,9 @@ Built with Python and OpenAI, packaged as a standalone `.exe` for easy use on Wi
 ---
 
 ## 📥 Download
-Head to the **[Releases](../../releases)** section and download the latest `.exe` file.  
+Head to the **[Releases](../../releases)** section and download the latest `.exe` file. 
+![Demo resume](rsmbuilderDEMO.jpeg)
+![Demo resume](rsmbuilderDEMO2.jpeg)
 
 ---
 
