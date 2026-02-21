@@ -1,6 +1,6 @@
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT as align
-from src.utils.helpers import style_as
+from utils.helpers import style_as
 
 def add_experience(doc, job, level, employer, date_range=None, description=None):
     table=doc.add_table(rows=1, cols=2)
