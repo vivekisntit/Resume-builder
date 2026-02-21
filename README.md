@@ -40,23 +40,23 @@ This project combines structured resume input, AI-driven content enhancement, an
 ## Project Structure
 ```bash
 src/
-|
+│
 ├── main.py
 ├── config.py
-|
+│
 ├── cli/
 │   └── input_collector.py
 │
 ├── ai/
 │   └── enhancer.py 
-|
+│
 ├── builder/
 │   ├── head.py
 │   ├── education.py
 │   ├── experience.py
 │   ├── projects.py
 │   └── skills.py
-|
+│
 ├── .env
 ├── requirements.txt
 └── README.md
@@ -113,4 +113,4 @@ Use this link to get api: https://aistudio.google.com/api-keys
 ---
 ## Demo result
 
-![result](C:\Users\demo_image.png)
+![result](demo_image.png)
