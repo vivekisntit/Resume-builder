@@ -1,9 +1,13 @@
-from openai import OpenAI, AuthenticationError
+from google import genai
 
 def validate_api(api_key: str) -> bool:
     try:
-        client = OpenAI(api_key=api_key)
-        client.models.list()
+        client = genai.Client(api_key=api_key)
+        # Small test call
+        client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents="Test"
+        )
         return True
-    except AuthenticationError:
+    except Exception:
         return False

@@ -1,57 +1,54 @@
-from openai import OpenAI
+from google import genai
+
+MODEL_NAME = "gemini-2.5-flash"
 
 def enhance_resume_data(input_data, client):
-    # prompt for project enhancement
-    openai_guider_0=(
-        "You are a resume assistant."
-        "Rewrite resume bullet points to be clear, precise and professional."
-        "Keep technical terms, metrics, and achievements intact."
+
+    guider_short = (
+        "You are a resume assistant.\n"
+        "Rewrite resume bullet points to be clear, precise and professional.\n"
+        "Keep technical terms, metrics, and achievements intact.\n"
+        "Return each bullet on a new line.\n"
+        "Do not number them.\n"
         "Return only the improved bullet points."
     )
-    # prompt for experience enhancement
-    openai_guider_1=(
-        "You are a resume assistant."
-        "Rewrite resume bullet points to be clear, precise and professional."
-        "If the input points are short, increase the sentence length."
-        "If the input points are long enough already, don't change anything except for grammatical errors"
-        "Keep technical terms, metrics, and achievements intact."
+
+    guider_long = (
+        "You are a resume assistant.\n"
+        "Rewrite resume bullet points to be clear, precise and professional.\n"
+        "If the input points are short, increase sentence length.\n"
+        "If long enough, only fix grammar.\n"
+        "Keep technical terms, metrics, and achievements intact.\n"
+        "Return each bullet on a new line.\n"
+        "Do not number them.\n"
         "Return only the improved bullet points."
     )
+
+    def polish(text, prompt):
+        response = client.models.generate_content(
+            model=MODEL_NAME,
+            contents=f"{prompt}\n\nPolish these resume bullet points:\n{text}"
+        )
+        return response.text.strip().split("\n")
+
+    # Experience
     for exp in input_data.get("experience", []):
         if exp.get("description"):
             bullets = "\n".join(exp["description"])
-            response = client.chat.completions.create(
-                model= "gpt-4o-mini",
-                messages=[
-                    {"role": "system", "content": openai_guider_1},
-                    {"role": "user", "content": f"Polish these resume bullet points:\n{bullets}"}
-                ]
-            )
-            improved = response.choices[0].message.content.strip().split("\n")
+            improved = polish(bullets, guider_long)
             exp["description"] = [b.strip("-• ") for b in improved if b.strip()]
+
+    # Projects
     for proj in input_data.get("projects", []):
         if proj.get("description"):
             bullets = "\n".join(proj["description"])
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {"role": "system", "content": openai_guider_1},
-                    {"role": "user", "content": f"Polish these resume bullet points:\n{bullets}"}
-                ]
-            )
-            improved = response.choices[0].message.content.strip().split("\n")
+            improved = polish(bullets, guider_long)
             proj["description"] = [b.strip("-• ") for b in improved if b.strip()]
-    # prompt for skills enhancement
+
+    # Skills duties
     if input_data.get("skills", {}).get("duties"):
         bullets = "\n".join(input_data["skills"]["duties"])
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": openai_guider_0},
-                {"role": "user", "content": f"Polish these resume bullet points:\n{bullets}"}
-            ]
-        )
-        improved = response.choices[0].message.content.strip().split("\n")
+        improved = polish(bullets, guider_short)
         input_data["skills"]["duties"] = [b.strip("-• ") for b in improved if b.strip()]
 
     return input_data

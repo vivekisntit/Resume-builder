@@ -1,5 +1,6 @@
 import sys
-from openai import OpenAI
+from google import genai
+from docx2pdf import convert
 from docx import Document
 from docx.shared import Inches
 
@@ -14,14 +15,16 @@ from src.builder.projects import add_project
 from src.builder.skills import add_skills
 
 def main():
-    api=input("Enter a valid openAI api key:")
+    api = input("Enter a valid Gemini API key: ")
+    api = input("Enter a valid Gemini API key: ")
+
     if validate_api(api):
         print("API key is verified")
-        client=OpenAI(api_key=api)
+        client = genai.Client(api_key=api)
     else:
         sys.exit("Invalid API, exiting....")
     raw_data = build_resume() 
-    enhanced_data = enhance_resume_data(raw_data,client)
+    enhanced_data = enhance_resume_data(raw_data, client)
     doc = Document()
     margins = doc.sections
     for margin in margins:
@@ -39,7 +42,14 @@ def main():
     add_sec_head(doc, "Projects & Certifications")
     for proj in enhanced_data["projects"]:
         add_project(doc, **proj)
-
     add_sec_head(doc, "Technical Skills & Extra Curricular")
     add_skills(doc, **enhanced_data["skills"])
-    doc.save("rsm_final.docx")
+    
+    doc.save("resume.docx")
+    print("Doc saved, you can edit further in doc as well...")
+
+    convert("resume.docx")
+    print("Resume saved as resume.pdf")
+
+if __name__=="__main__":
+    main()
