@@ -1,6 +1,6 @@
 from docx.shared import Inches
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT as align
-from utils.helpers import style_as
+from src.utils.helpers import style_as
 
 def add_education(doc, school, grad_date=None, degree=None, coursework=None):
     table=doc.add_table(rows=1,cols=2)

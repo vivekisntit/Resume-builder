@@ -3,15 +3,15 @@ from openai import OpenAI
 from docx import Document
 from docx.shared import Inches
 
-from config import validate_api
-from cli.input_collector import build_resume
-from ai.enhancer import enhance_resume_data
+from src.config import validate_api
+from src.cli.input_collector import build_resume
+from src.ai.enhancer import enhance_resume_data
 
-from builder.head import add_head_info, add_sec_head
-from builder.education import add_education
-from builder.experience import add_experience
-from builder.projects import add_project
-from builder.skills import add_skills
+from src.builder.head import add_head_info, add_sec_head
+from src.builder.education import add_education
+from src.builder.experience import add_experience
+from src.builder.projects import add_project
+from src.builder.skills import add_skills
 
 def main():
     api=input("Enter a valid openAI api key:")

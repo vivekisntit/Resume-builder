@@ -2,7 +2,7 @@ from docx.enum.text import WD_PARAGRAPH_ALIGNMENT as align
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Pt
-from utils.helpers import style_as, add_hlink
+from src.utils.helpers import style_as, add_hlink
 
 def add_sec_head(doc, title):
 

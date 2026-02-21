@@ -1,5 +1,5 @@
 from docx.shared import Pt
-from utils.helpers import style_as
+from src.utils.helpers import style_as
 
 def add_skills(doc, prog_lang, frm_lib, duties):
     para_skill=doc.add_paragraph()
