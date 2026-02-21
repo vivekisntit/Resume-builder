@@ -53,4 +53,4 @@ def add_head_info(doc, name, phone=None, email=None, github=None, linkedin=None)
     if linkedin:
         if infoSLOT or github: 
             infoLINE.add_run("  |  ")
-        add_hlink(infoLINE, f"https://www.linkedin.com/in/{linkedin}", "LinkedIn")
+        add_hlink(infoLINE, f"{linkedin}", "LinkedIn")

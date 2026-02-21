@@ -38,9 +38,9 @@ def get_projects():
         print(f"\n--- Project {i} ---")
         proj={
             "pr_cr_name": get_input("Enter project name"),
-            "timeframe": get_input("Enter project timeframe"),
-            "description": get_dynamic_list("project description bullets"),
-            "framework": get_dynamic_list("Mention the frameworks/libraries which you used in this project"),
+            "timeframe": get_input("Enter project timefram [Eg: Jan 2020 - Dec 2021]"),
+            "description": get_dynamic_list("project description [One bullet at a time]"),
+            "framework": get_dynamic_list("the frameworks/libraries which you used in this project"),
             "domain": get_input("Enter project domain (Eg: Web dev, App dev, ML engineer etc. [WRITE IN FULL FORM])")
         }
         projects.append(proj)
@@ -57,15 +57,15 @@ def build_resume():
             "phone": get_input("Enter your phone number"),
             "email": get_input("Enter your email"),
             "github": get_input("Enter your GitHub username"),
-            "linkedin": get_input("Enter your LinkedIn handle")
+            "linkedin": get_input("Enter your LinkedIn url")
         },
 
         "education": [
             {
                 "school": get_input("Enter your school/college name"),
                 "grad_date": get_input("Enter your graduation year"),
-                "degree": get_input("Enter your degree"),
-                "coursework": get_input("Enter your coursework (Eg: WebDev, DBMS, DSA, ML, Data Science etc. [WRITE IN FULL FORM] ")
+                "degree": get_input("Enter degree you're pursuing/pursued (Eg: B.Tech in ECE [WRITE IN FULL FORM])"),
+                "coursework": get_dynamic_list("your coursework (Eg: WebDev, DBMS, DSA, ML, Data Science etc. [WRITE IN FULL FORM, one at a time])")
             }
         ],
 
@@ -73,9 +73,9 @@ def build_resume():
         "projects": get_projects(),
 
         "skills": {
-            "prog_lang": get_dynamic_list("Mention the programming languages you know"),
-            "frm_lib": get_dynamic_list("Mention any frameworks/libraries/tools you know"),
-            "duties": get_dynamic_list("Mention any duties/soft skills you have")
+            "prog_lang": get_dynamic_list("mention any programming languages that you know [one at a time]"),
+            "frm_lib": get_dynamic_list("mention any frameworks/libraries/tools that you know [one at a time]"),
+            "duties": get_dynamic_list("mention any duties/soft skills you might have [Enter a sentence, one at a time]"),
         }
     }
     return resume_data

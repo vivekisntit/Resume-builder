@@ -16,8 +16,6 @@ from src.builder.skills import add_skills
 
 def main():
     api = input("Enter a valid Gemini API key: ")
-    api = input("Enter a valid Gemini API key: ")
-
     if validate_api(api):
         print("API key is verified")
         client = genai.Client(api_key=api)
